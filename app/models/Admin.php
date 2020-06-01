@@ -271,6 +271,32 @@ class Admin
         }
     }
 
+    public function delVideo($id) {
+
+        $this->db->query('DELETE FROM pd_videos WHERE vd_id = :id');
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delImage($id) {
+
+        $this->db->query('DELETE FROM pd_images WHERE gl_id = :id');
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }
