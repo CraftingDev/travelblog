@@ -1163,6 +1163,39 @@ class Admins extends Base
     }
 
 
+    public function deleteVideo($id)
+    {
+        $returnUrl = $_POST['returnUrl'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->adminModel->delVideo($id)) {
+                flash('resume_message', 'Video deleted');
+                redirect($returnUrl);
+            } else {
+                exit('Something went wrong');
+            }
+        } else {
+            redirect($returnUrl);
+        }
+    }
+
+    public function deleteImage($id)
+    {
+        $returnUrl = $_POST['returnUrl'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->adminModel->delImage($id)) {
+                flash('resume_message', 'Image deleted');
+                redirect($returnUrl);
+            } else {
+                exit('Something went wrong');
+            }
+        } else {
+            redirect($returnUrl);
+        }
+    }
+
+
+
+
 
 
 }
