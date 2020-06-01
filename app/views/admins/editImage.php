@@ -6,15 +6,14 @@
                     <div class="col-md-10 mx-auto">
                         <div class="card card-body bg-light mb-5">
                             <?php echo flash('resume_message'); ?>
-                            <h2>Add image</h2>
+                            <h2>Edit image</h2>
                             <?php echo flash_error('resume_errors'); ?>
                             <p>Please fill in all fields with <sub>*</sub></p>
-                            <form action="<?php echo URLROOT; ?>/admins/addImage" class="icon-form process" enctype="multipart/form-data" method="post" novalidate>
+                            <form action="<?php echo URLROOT; ?>/admins/editImage" class="icon-form process" enctype="multipart/form-data" method="post" novalidate>
                                 <input type="hidden" name="token" value="<?php echo createToken(); ?>">
-                                <input type="hidden" name="glFolder" id="hiddenInput" />
                                 <div class="col-md-12 mb-3">
                                     <label for="glCat"><i class="far fa-flag formIcons"></i> Category: <sub>*</sub></label>
-                                    <select onchange="changeHiddenInput(this)" id="glCat" name="glCat" class="custom-select custom-select-lg mb-3 <?php echo (!empty($data['glCat_err'])) ? 'is-invalid' : ''; ?>" required>
+                                    <select id="glCat" name="glCat" class="custom-select custom-select-lg mb-3 <?php echo (!empty($data['glCat_err'])) ? 'is-invalid' : ''; ?>" required>
                                         <option value="" selected>Select category</option>
                                         <?php
                                         if(is_array($data['categories'])) :
@@ -45,6 +44,13 @@
                                               class="form-control form-control-lg profile_form_bio"><?php echo $data['glDesc']; ?></textarea>
                                 </div>
                                 <div class="col-md-12 mb-3">
+                                    <label for="sameFile"><i class="fab fa-wordpress formIcons mt-3"></i> <span class="inline-span">Photo: </span></label>
+                                    <div class="userAvatar mt-3">
+                                        <img class="img-fluid mx-auto d-block" src="<?php echo URLROOT; ?>/photoImg/thumbs/<?php echo $data['glId']->gl_img; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
                                     <div class="custom-file form-control-lg mb-2" id="customFile" lang="en">
                                         <label class="custom-file-label" for="exampleInputFile">
                                             <small>Upload image...</small>
@@ -56,7 +62,7 @@
                                     </div>
 
                                     <div class="form-group mt-4 mb-3">
-                                        <input type="submit" value="Upload" class="btn btn-primary btn-block">
+                                        <input type="submit" value="Update" class="btn btn-primary btn-block">
                                     </div>
                                 </div>
                             </form>

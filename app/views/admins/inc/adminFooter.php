@@ -53,6 +53,15 @@
     $('.reports').DataTable({
         responsive: true
     } );
+
+    function changeHiddenInput (objDropDown)
+    {
+        let t = $( "#glCat option:selected" ).text();
+        $('#hiddenInput').val(t);
+        return objDropDown;
+   }
+
+
 </script>
 </body>
 </html>

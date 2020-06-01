@@ -620,8 +620,7 @@ class Admins extends Base
                         ->crop(1200, 400, true, ImageResize::CROPCENTER)
                         ->save($path)
                         ->resizeToWidth(600)
-                        ->save($path2)
-                    ;
+                        ->save($path2);
 
                 } elseif ($_FILES['post_img']['size'][0] == 0 and $_FILES['post_img']['tmp_name'][0] === '' and $data['noImg'] == 1) {
 
@@ -727,8 +726,7 @@ class Admins extends Base
                     ->crop(1200, 400, true, ImageResize::CROPCENTER)
                     ->save($path)
                     ->resizeToWidth(600)
-                    ->save($path2)
-                ;
+                    ->save($path2);
 
             } elseif ($_FILES['post_img']['size'][0] == 0 and $_FILES['post_img']['tmp_name'][0] === '' and $data['noImg'] == 1) {
 
@@ -759,6 +757,144 @@ class Admins extends Base
     }
 
 
+    public function editImage()
+    {
+
+        $images = $this->adminModel->getAllImages();
+        $categories = $this->pageModel->getGalleryCategories();
+        $countImages = $this->adminModel->countImages();
+
+        $data =
+            [
+                'images' => $images,
+                'categories' => $categories,
+                'countImages' => $countImages
+            ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data =
+                [
+                    'categories' => $categories,
+                    'images' => $images,
+                    'glTitle' => trim($_POST['glTitle']),
+                    'glDesc' => trim($_POST['glDesc']),
+                    'glFolder' => trim($_POST['glFolder']),
+                    'glImg' => $_FILES['glImg']['name'],
+                    'glCat' => trim($_POST['glCat']),
+                    'glTitle_err' => '',
+                    'glImg_err' => '',
+                    'glCat_err' => ''
+
+                ];
+
+            if (empty($data['glTitle'])) {
+                $data['glTitle_err'] = 'Please add title';
+            }
+            if (empty($data['glImg'])) {
+                $data['glImg_err'] = 'Please add images';
+            }
+            if (empty($data['glCat'])) {
+                $data['glCat_err'] = 'Please select category';
+            }
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $cat_folder = prettyUrl($data['glTitle']);
+
+            if (empty($data['glTitle_err']) and empty($data['glImg_err']) and empty($data['glCat_err'])) {
+
+                // $this->flexibleImgUpload($new_name);
+                // Check the file upload
+                //pass the file name to our mime type helper and check the type
+                if ($_FILES['glImg']['error'] == 0) {
+                    $type = (get_mime($_FILES['img']['tmp_name']));
+                    if ($type == 'image/jpeg' or $type == 'image/jpg' or $type == 'image/png') {
+                        // File is excepted
+                    } else {
+                        $data['glImg_err'] = 'Sorry! Only jpg/jpeg/png files are allowed';
+                    }
+                    $size = $_FILES['glImg']['size'];
+                    if ($size > 31457280) {
+                        $data['glImg_err'] = 'Sorry! Max size is 30MB. Select a smaller file';
+                    }
+                    // Set the upload directory
+                    $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/' . $cat_folder;
+                    $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile';
+                    $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs';
+                    // If no folder create one with permissions
+                    if (!file_exists($directory)) {
+                        mkdir($directory, 755, true);
+                    }
+                    // Rename filename
+                    $new_name = round(microtime(true)) . "_" . strtolower($_FILES['glImg']['name']);
+                    // Check if file exist and add write permissions
+                    $path = $directory . '/' . basename($new_name);
+                    $path1 = $directory1 . '/' . basename($new_name);
+                    $path2 = $directory2 . '/' . basename($new_name);
+
+                    if (file_exists($path)) {
+                        chmod($path, 755);
+                    }
+                    if (move_uploaded_file($_FILES['glImg']['tmp_name'], strtolower($path))) {
+                        // File uploaded
+                    } else {
+                        echo 'Failed to upload your image';
+                        exit();
+                    }
+                    // Resize the image
+                    $image = new ImageResize($path);
+                    $image->gamma(false);
+                    $image->quality_jpg = 90;
+                    $image->interlace = 0;
+                    $image
+                        ->resizeToWidth(1024)
+                        ->save($path)
+
+                        ->resizeToWidth(600)
+                        ->save($path1)
+
+                        ->resizeToWidth(200)
+                        ->save($path2)
+                    ;
+
+                } else {
+                    // If no new file set the current DATABASE VALUE AS DEFAULT
+                    $new_name = $data['sameFile'];
+                }
+
+
+                if ($this->adminModel->updateImage($data, $new_name)) {
+
+                    flash('resume_message', 'Image updated');
+                    redirect('admins/editImage');
+                    exit();
+
+                } else {
+
+                    echo "Unable to save data";
+                }
+            } else {
+
+                // SHOW ERRORS
+                $this->adminHeader();
+                $this->adminNav();
+                $this->view('admins/editImage', $data);
+                $this->adminFooter();
+
+            }
+        }
+
+        /// SHOW DEFAULT VIEW
+        $this->adminHeader();
+        $this->adminNav();
+        $this->view('admins/editImage', $data);
+        $this->adminFooter();
+
+    }
+
+
+
 
     public function flexibleImgUpload() {
 
@@ -775,10 +911,11 @@ class Admins extends Base
             if ($size > 31457280) {
                 $data['glImg_err'] = 'Sorry! Max size is 30MB. Select a smaller file';
             }
+            $cat_folder = prettyUrl($data['glTitle']);
             // Set the upload directory
-            $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/';
-            $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile/';
-            $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs/';
+            $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/' . $cat_folder;
+            $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile';
+            $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs';
             // If no folder create one with permissions
             if (!file_exists($directory)) {
                 mkdir($directory, 755, true);
@@ -786,9 +923,9 @@ class Admins extends Base
             // Rename filename
             $new_name = round(microtime(true)) . "_" . strtolower($_FILES['glImg']['name']);
             // Check if file exist and add write permissions
-            $path = $directory . basename($new_name);
-            $path1 = $directory1 . basename($new_name);
-            $path2 = $directory2 . basename($new_name);
+            $path = $directory . '/' . basename($new_name);
+            $path1 = $directory1 . '/' . basename($new_name);
+            $path2 = $directory2 . '/' . basename($new_name);
 
             if (file_exists($path)) {
                 chmod($path, 755);
@@ -861,10 +998,10 @@ class Admins extends Base
             }
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $cat_folder = cleanerUrlTitle($data['glTitle']);
+            $cat_folder = prettyUrl($data['glFolder']);
 
             if (empty($data['glTitle_err']) and empty($data['glImg_err']) and empty($data['glCat_err'])) {
+
 
                // $this->flexibleImgUpload($new_name);
                 // Check the file upload
@@ -882,8 +1019,9 @@ class Admins extends Base
                     }
                     // Set the upload directory
                     $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/' . $cat_folder;
-                    $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile/';
-                    $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs/';
+                    $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile';
+                    $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs';
+
                     // If no folder create one with permissions
                     if (!file_exists($directory)) {
                         mkdir($directory, 755, true);
@@ -891,9 +1029,9 @@ class Admins extends Base
                     // Rename filename
                     $new_name = round(microtime(true)) . "_" . strtolower($_FILES['glImg']['name']);
                     // Check if file exist and add write permissions
-                    $path = $directory . basename($new_name);
-                    $path1 = $directory1 . basename($new_name);
-                    $path2 = $directory2 . basename($new_name);
+                    $path = $directory . '/' . basename($new_name);
+                    $path1 = $directory1 . '/' . basename($new_name);
+                    $path2 = $directory2 . '/' . basename($new_name);
 
                     if (file_exists($path)) {
                         chmod($path, 755);
@@ -1181,8 +1319,16 @@ class Admins extends Base
     public function deleteImage($id)
     {
         $returnUrl = $_POST['returnUrl'];
+        $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/' . $_POST['folder'] . '/' . $_POST['file'];
+        $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile/' . '/' . $_POST['file'];
+        $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs/' . '/' . $_POST['file'];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->adminModel->delImage($id)) {
+               if(!unlink($directory)) : echo "File error, File not removed"; else:
+                unlink($directory);
+                unlink($directory1);
+                unlink($directory2);
+            endif;
                 flash('resume_message', 'Image deleted');
                 redirect($returnUrl);
             } else {

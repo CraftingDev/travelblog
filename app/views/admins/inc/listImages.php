@@ -8,7 +8,7 @@
         ?>
     </div>
 
-    <table class="table table-sm table-striped table-bordered">
+    <table class="table table-sm table-striped table-bordered reports">
         <thead class="thead-dark mb-2">
         <tr>
             <th scope="col">Category</th>
@@ -29,13 +29,15 @@
                 <tr>
                     <th class="text-center text-md-left" scope="col"><?php echo $gl->gl_cat_title; ?></th>
                     <th class="text-center text-md-left" scope="col"><?php echo $gl->gl_title; ?></th>
-                    <th class="text-center text-md-left" scope="col"><?php echo $gl->gl_desc; ?></th>
+                    <th class="text-center text-md-left" scope="col"><small><?php echo $gl->gl_desc; ?></small></th>
                     <th class="text-center text-md-left" scope="col"><img class="img-fluid" src="<?php echo URLROOT . '/photoImg/thumbs/' . $gl->gl_img; ?>" alt="<?php echo $gl->gl_img; ?>"></th>
                     <th class="text-center text-md-left" scope="col"><small><?php echo infoDate($gl->gl_created); ?></small></th>
                     <th class="text-center p-1" scope="col"><a href="<?php echo URLROOT . '/admins/editImage/' . $gl->gl_id; ?>" class="btn btn-block btn-light btn-sm btn-block-xs"><i class="far fa-edit"></i></a></th>
                     <th class="text-center p-1" scope="col">
                         <form action="<?php echo URLROOT . '/admins/deleteImage/' . $gl->gl_id; ?>" method="post">
                             <input type="hidden" name="returnUrl" value="<?php echo $_GET['url']; ?>">
+                            <input type="hidden" name="folder" value="<?php echo $gl->gl_folder; ?>">
+                            <input type="hidden" name="file" value="<?php echo $gl->gl_img; ?>">
                             <button type="submit" class="btn btn-sm btn-danger delete_with_icon btn-block btn-block-xs"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </th>
