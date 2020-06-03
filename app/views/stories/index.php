@@ -8,8 +8,6 @@
                         <?php flash('resume_message'); ?>
                             <!-- Content-->
 
-
-
                             <div class="md-content">
                                 <!-- Section -->
                                 <section class="md-section">
@@ -28,8 +26,12 @@
                                                             <li><a href="<?php echo URLROOT . '/categories/' . $post->ps_cat_slug . '/' . cleanerUrl($post->ps_cat_name); ?>"><?php echo $post->ps_cat_name; ?></a></li>
                                                         </ul>
                                                         <h2 class="post-01__title"><a href="<?php echo URLROOT . '/stories/show/' . $post->ps_slug . '/' . cleanerUrl($post->ps_title); ?>"><?php echo $post->ps_title; ?></a></h2>
-                                                        <div class="post-01__time"><?php echo friendlyDate($post->ps_created); ?></div>
-                                                        <div class="post-01__note">by <?php echo ucwords($post->user_first . $post->user_last); ?></div>
+                                                        <div class="post-01__time">Written:</div>
+                                                        <div class="post-01__note"><?php echo infoDate($post->ps_created); ?>.</div>
+                                                        <div class="post-01__time">&nbsp;Updated:</div>
+                                                        <div class="post-01__note"><?php echo infoDate($post->ps_updated); ?>.</div>
+                                                        <div class="post-01__time">&nbsp;By:</div>
+                                                        <div class="post-01__note"><?php echo ucwords($post->us_first . '&nbsp;' . $post->us_last); ?></div>
                                                     </div>
                                                 </div><!-- End /  -->
                                                 <?php endforeach; ?>

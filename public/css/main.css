@@ -1013,14 +1013,14 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
         margin-top: -1em;
     }
 }
-
+/*
 @media (min-width: 768px) {
     .consult-postDetail__main, .consult-projectDetail__main {
         padding-top: calc(20.83333vw - 110px);
         padding-bottom: calc(20.83333vw - 110px);
     }
 }
-
+*/
 @media (min-width: 1200px) {
     .consult-postDetail__main, .consult-projectDetail__main {
         padding-top: 140px;
@@ -1083,6 +1083,7 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
     padding: 0;
     margin: 0 0 30px;
 }
+
 .consult-postDetail__content img {
     border-radius: 55px 55px 25px 5px/5px 25px 55px 55px;
 }
@@ -1095,7 +1096,11 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
 
 .consult-postDetail__meta li i {
     margin-right: 10px;
+    -webkit-text-fill-color:   #f8b600;
+    -webkit-text-stroke-width: 0.002em;
+    -webkit-text-stroke-color: #d4d7d8;
 }
+
 
 .consult-projectDetail__slider .owl-dots {
     left: 0;

@@ -79,7 +79,7 @@ class Base
     }
 
     public function standardFooter(){
-
+        $menu = $this->pageModel->getMenu();
         if(empty($data)){
 
             $data = [
@@ -87,7 +87,8 @@ class Base
                 'addr' => $this->site->site_contact_add,
                 'phone' => $this->site->site_contact_num,
                 'links' => $this->links,
-                'social' => $this->socials
+                'social' => $this->socials,
+                'menu' => $menu
             ];
         }
         $this->view('inc/footer', $data);

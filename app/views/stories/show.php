@@ -23,51 +23,11 @@
                         <!-- social-01 -->
                         <div class="social-01 social-01__style-02">
                             <nav class="social-01__navSocial">
-                                <?php if (!empty($data['social']->facebook_so)) : ?>
-                                    <a class="social-01__item" id="facebook-page-footer"
-                                       href="<?php echo $data['social']->facebook_so; ?>" target="_blank"
-                                       title="<?php echo SITENAME; ?> on Facebook"><i
-                                                class="fab fa-facebook fa-fw"></i></a>
-                                <?php endif; ?>
-                                <?php if (!empty($data['social']->twitter_so)) : ?>
-                                    <a class="social-01__item" href="<?php echo $data['social']->twitter_so; ?>"
-                                       target="_blank"
-                                       title="<?php echo SITENAME; ?> on Twitter"><i
-                                                class="fab fa-twitter fa-fw"></i></a>
-                                <?php endif; ?>
-                                <?php if (!empty($data['social']->linkedin_so)) : ?>
-                                    <a class="social-01__item" id="linkedin-page-footer"
-                                       href="<?php echo $data['social']->linkedin_so; ?>" target="_blank"
-                                       title="<?php echo SITENAME; ?> on Linkedin"><i
-                                                class="fab fa-linkedin fa-fw"></i></a>
-                                <?php endif; ?>
-                                <?php if (!empty($data['social']->google_so)) : ?>
-                                    <a class="social-01__item" href="<?php echo $data['social']->google_so; ?>"
-                                       target="_blank"
-                                       title="<?php echo SITENAME; ?> on google plus"><i
-                                                class="fab fa-google-plus-g fa-fw"></i></a>
-                                <?php endif; ?>
-                                <?php if (!empty($data['social']->instagram_so)) : ?>
-                                    <a class="social-01__item" id="instagram-page-footer"
-                                       href="<?php echo $data['social']->instagram_so; ?>" target="_blank"
-                                       title="<?php echo SITENAME; ?> on Instagram"><i
-                                                class="fab fa-instagram fa-fw"></i></a>
-                                <?php endif; ?>
-
-                                <?php if (!empty($data['social']->quora_so)) : ?>
-                                    <a class="social-01__item" id="quora-page-footer"
-                                       href="<?php echo $data['social']->quora_so; ?>" target="_blank"
-                                       title="<?php echo SITENAME; ?> on Quora"><i
-                                                class="fab fa-quora fa-fw"></i></a>
-                                <?php endif; ?>
-
-                                <?php if (!empty($data['social']->youtube_so)) : ?>
-                                    <a class="social-01__item" href="<?php echo $data['social']->youtube_so; ?>"
-                                       target="_blank"
-                                       title="<?php echo SITENAME; ?> on Youtube"><i
-                                                class="fab fa-youtube fa-fw"></i></a>
-                                <?php endif; ?>
-
+                                <a title="Share on Facebook" class="customer share social-01__item" href="http://www.facebook.com/sharer.php?u=<?php echo URLROOT . '/' . $_GET['url']; ?>"><i class="fab fa-facebook-f fa-fw"></i></a>
+                                <a title="Share on Linkedin" class="customer share social-01__item" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo URLROOT . '/' . $_GET['url']; ?>&title="><i class="fab fa-linkedin-in fa-fw"></i></a>
+                                <a title="Share on WhatsApp" class="customer share social-01__item" href=" https://wa.me/?text=<?php echo URLROOT . '/' . $_GET['url']; ?>"><strong><i class="fab fa-whatsapp fa-fw"></i></strong></a>
+                                </br>
+                                <div class="fb-like" data-href="https://www.facebook.com/driftingDane/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="false"></div>
                             </nav>
                         </div><!-- End / social-01 -->
 
@@ -77,15 +37,18 @@
                                     <div class="row">
                                         <div class="col-xl-11 offset-0 offset-sm-0 offset-md-0 offset-lg-0 offset-xl-1 ">
                                             <h1><?php echo $data['post']->ps_title; ?></h1>
-                                            <ul class="consult-postDetail__meta">
+                                            <ul id="meta-icons" class="consult-postDetail__meta">
                                                 <li><i class="fa fa-user"
-                                                       aria-hidden="true"></i> <?php echo $data['post']->us_first . '&nbsp;' . $data['post']->us_last; ?>
+                                                       aria-hidden="true"></i> <?php echo ucwords($data['post']->us_first . '&nbsp;' . $data['post']->us_last); ?>
                                                 </li>
                                                 <li><i class="fa fa-tags"
                                                        aria-hidden="true"></i><?php echo $data['post']->ps_cat_name; ?>
                                                 </li>
                                                 <li><i class="fa fa-calendar"
                                                        aria-hidden="true"></i><?php echo infoDate($data['post']->ps_created); ?>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-pen-alt"></i><?php echo infoDate($data['post']->ps_updated); ?>
                                                 </li>
                                             </ul>
                                         </div>

@@ -271,14 +271,10 @@
     color: #f8b600;
 }
 
-i {
+.footer-area i {
     -webkit-text-fill-color:   #f8b600;
     -webkit-text-stroke-width: 0.002em;
     -webkit-text-stroke-color: #d4d7d8;
 }
 
-.consult-postDetail__main i {
-    -webkit-text-fill-color:   #d4d7d8;
-    -webkit-text-stroke-width: 0.002em;
-    -webkit-text-stroke-color: #d4d7d8;
-}
+

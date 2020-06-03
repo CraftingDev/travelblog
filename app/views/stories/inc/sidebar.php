@@ -7,7 +7,8 @@
                     <?php foreach ($data['categories'] as $category) : ?>
                         <li><a class="eppMe"
                                href="<?php echo URLROOT . '/categories/' . $category->ps_cat_slug . '/' . cleanerUrl($category->ps_cat_name); ?>"><i
-                                        class="fas fa-chevron-right"></i> <?php echo $category->ps_cat_name; ?></a></li>
+                                        class="fas fa-chevron-right"></i> <?php echo $category->ps_cat_name; ?><span class="badge"> (<?php echo $category->post_count; ?>)</span></a></li>
+                        <li><small><?php echo $category->ps_cat_desc; ?></small></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

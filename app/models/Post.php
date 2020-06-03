@@ -63,7 +63,8 @@ class Post {
     }
 
     public function getCategories(){
-        $this->db->query('SELECT * FROM pd_blog_cat ORDER BY cat_created DESC');
+        $this->db->query('SELECT *, ( SELECT COUNT(*) FROM pd_blog WHERE fk_cat_id = ps_cat_id) AS post_count FROM pd_blog_cat 
+                              LEFT JOIN pd_blog ON pd_blog.fk_cat_id = pd_blog_cat.ps_cat_id GROUP BY ps_cat_id ORDER BY cat_created DESC');
         $results = $this->db->resultSet();
         return $results;
     }

@@ -34,7 +34,8 @@ class Page
 
 
     public function getGalleryCategories() {
-        $this->db->query('SELECT * FROM pd_galleries');
+        $this->db->query('SELECT *, ( SELECT COUNT(*) FROM pd_images WHERE fk_cat_id = gl_cat_id) AS img_count FROM pd_galleries
+                                          LEFT JOIN pd_images ON pd_images.fk_cat_id = pd_galleries.gl_cat_id GROUP BY gl_cat_id ORDER BY gl_id DESC');
         $result = $this->db->resultSet();
         return $result;
     }
@@ -51,7 +52,8 @@ class Page
 
 
     public function getVideoCategories() {
-        $this->db->query('SELECT * FROM pd_vid_categories');
+        $this->db->query('SELECT *, ( SELECT COUNT(*) FROM pd_videos WHERE fk_vid_cat_id = vd_cat_id) AS vid_count FROM pd_vid_categories
+                               LEFT JOIN pd_videos ON pd_videos.fk_vid_cat_id = pd_vid_categories.vd_cat_id GROUP BY vd_cat_id ORDER BY vd_id DESC');
         $result = $this->db->resultSet();
         return $result;
     }
