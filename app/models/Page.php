@@ -70,13 +70,13 @@ class Page
 
 
     public function getSlider() {
-        $this->db->query('SELECT * FROM pd_slide');
+        $this->db->query('SELECT * FROM pd_slides');
         $result = $this->db->resultSet();
         return $result;
     }
 
     public function getFlex() {
-        $this->db->query('SELECT * FROM pd_slide ORDER BY RAND() LIMIT 0, 4');
+        $this->db->query('SELECT * FROM pd_slides ORDER BY RAND() LIMIT 0, 4');
         $result = $this->db->resultSet();
         return $result;
     }

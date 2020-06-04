@@ -71,6 +71,22 @@ class Admin
     }
 
 
+    public function saveSlide($data, $new_name) {
+        $this->db->query('INSERT INTO pd_slides (sl_title, sl_desc, sl_img, sl_data) VALUES (:slTitle, :slDesc, :slImg, :slData)');
+
+        $this->db->bind(':slTitle', $data['slTitle']);
+        $this->db->bind(':slDesc', $data['slDesc']);
+        $this->db->bind(':slImg', $new_name);
+        $this->db->bind(':slData', $data['slData']);
+
+        if($this->db->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     //////////////// UPDATE  FUNCTIONS //////////////////////////////////////////////
 
     public function updateNews($data){
@@ -191,7 +207,12 @@ class Admin
     }
 
 
+    public function getAllSlides(){
+        $this->db->query('SELECT * FROM pd_slides ORDER BY pd_slides.sl_created DESC');
 
+        $results = $this->db->resultSet();
+        return $results;
+    }
 
 
     //// COUNT FUNCTIONS
@@ -287,6 +308,20 @@ class Admin
     public function delImage($id) {
 
         $this->db->query('DELETE FROM pd_images WHERE gl_id = :id');
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function delSlide($id) {
+
+        $this->db->query('DELETE FROM pd_slides WHERE sl_id = :id');
         $this->db->bind(':id', $id);
 
         // Execute

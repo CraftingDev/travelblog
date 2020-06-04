@@ -1007,7 +1007,7 @@ class Admins extends Base
                 // Check the file upload
                 //pass the file name to our mime type helper and check the type
                 if ($_FILES['glImg']['error'] == 0) {
-                    $type = (get_mime($_FILES['img']['tmp_name']));
+                    $type = (get_mime($_FILES['glImg']['tmp_name']));
                     if ($type == 'image/jpeg' or $type == 'image/jpg' or $type == 'image/png') {
                         // File is excepted
                     } else {
@@ -1164,6 +1164,119 @@ class Admins extends Base
         $this->adminHeader();
         $this->adminNav();
         $this->view('admins/addVideo', $data);
+        $this->adminFooter();
+
+    }
+
+
+
+    public function addSlide()
+    {
+        $slides = $this->adminModel->getAllSlides();
+        $data =
+            [
+                'slides' => $slides,
+            ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data =
+                [
+                    'slides' => $slides,
+                    'slTitle' => trim($_POST['slTitle']),
+                    'slDesc' => trim($_POST['slDesc']),
+                    'slData' => trim($_POST['slData']),
+                    'slImg' => $_FILES['slImg']['name'],
+                    'slImg_err' => ''
+                ];
+
+
+            if (empty($data['slImg'])) {
+                $data['slImg_err'] = "Please select image";
+            }
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            if (empty($data['slImg_err'])) {
+                // Check the file upload
+                //pass the file name to our mime type helper and check the type
+                if ($_FILES['slImg']['error'] == 0) {
+                    $type = (get_mime($_FILES['slImg']['tmp_name']));
+                    if ($type == 'image/jpeg' or $type == 'image/jpg' or $type == 'image/png') {
+                        // File is excepted
+                    } else {
+                        $data['slImg_err'] = 'Sorry! Only jpg/jpeg/png files are allowed';
+                    }
+                    $size = $_FILES['slImg']['size'];
+                    if ($size > 31457280) {
+                        $data['slImg_err'] = 'Sorry! Max size is 30MB. Select a smaller file';
+                    }
+                    // Set the upload directory
+                    $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/sliderImg';
+                    $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/sliderImg/mobile';
+
+                    // If no folder create one with permissions
+                    if (!file_exists($directory)) {
+                        mkdir($directory, 755, true);
+                    }
+                    if (!file_exists($directory1)) {
+                        mkdir($directory1, 755, true);
+                    }
+                    // Rename filename
+                    $new_name = round(microtime(true)) . "_" . strtolower($_FILES['slImg']['name']);
+                    // Check if file exist and add write permissions
+                    $path = $directory . '/' . basename($new_name);
+                    $path1 = $directory1 . '/' . basename($new_name);
+
+                    if (file_exists($path)) {
+                        chmod($path, 755);
+                    }
+                    if (move_uploaded_file($_FILES['slImg']['tmp_name'], strtolower($path))) {
+                        // File uploaded
+                    } else {
+                        echo 'Failed to upload your slide';
+                        exit();
+                    }
+                    // Resize the image
+                    $image = new ImageResize($path);
+                    $image->gamma(false);
+                    $image->quality_jpg = 90;
+                    $image->interlace = 0;
+                    $image
+                        ->crop(1350, 550)
+                        ->save($path)
+                        ->crop(650, 150)
+                        ->save($path1);
+
+                } else {
+                    // If no new file set the current DATABASE VALUE AS DEFAULT
+                    $new_name = $data['sameFile'];
+                }
+
+                if ($this->adminModel->saveSlide($data, $new_name)) {
+
+                    flash('resume_message', 'Slide added');
+                    redirect('admins/addSlide');
+                    exit();
+
+                } else {
+                    echo "Unable to save data";
+                }
+            } else {
+
+                // SHOW ERRORS
+                $this->adminHeader();
+                $this->adminNav();
+                $this->view('admins/addSlide', $data);
+                $this->adminFooter();
+
+            }
+        }
+
+        /// SHOW DEFAULT VIEW
+        $this->adminHeader();
+        $this->adminNav();
+        $this->view('admins/addSlide', $data);
         $this->adminFooter();
 
     }
@@ -1330,6 +1443,30 @@ class Admins extends Base
                 unlink($directory2);
             endif;
                 flash('resume_message', 'Image deleted');
+                redirect($returnUrl);
+            } else {
+                exit('Something went wrong');
+            }
+        } else {
+            redirect($returnUrl);
+        }
+    }
+
+
+
+    public function deleteSlide($id)
+    {
+        $returnUrl = $_POST['returnUrl'];
+        $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/sliderImg/' . $_POST['file'];
+        $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/sliderImg/mobile/' . '/' . $_POST['file'];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->adminModel->delSlide($id)) {
+                if(!unlink($directory)) : echo "File error, File not removed"; else:
+                    unlink($directory);
+                    unlink($directory1);
+                endif;
+                flash('resume_message', 'Slide deleted');
                 redirect($returnUrl);
             } else {
                 exit('Something went wrong');

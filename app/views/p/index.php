@@ -10,12 +10,12 @@
         <h1 class="text-center text-uppercase mt-5 mb-5"><?php echo SITENAME; ?></h1>
         <div class="row">
             <div class="col-sm-6 mb-5">
-                <img class="img-fluid" src="<?php echo URLROOT; ?>/img/cartoon-min.png">
+                <img class="img-fluid" src="<?php echo URLROOT; ?>/all_img/img/cartoon-min.png">
             </div>
         <div class="col-sm-5 lead text-justify mb-5">
                 <p>
                     <?php echo $data['siteDesc']; ?>
-                   <br><br><strong class="lead font-weight-bold">Author: Janaina Santos.</strong>
+                   <br><br><strong class="lead font-weight-bold">Author:</strong> Janaina Noerregaard Santos.
                 </p>
          </div>
 

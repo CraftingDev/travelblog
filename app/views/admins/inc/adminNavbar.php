@@ -6,14 +6,14 @@
         <div class="sidenav-header d-flex align-items-center justify-content-center">
             <!-- User Info-->
             <div class="sidenav-header-inner text-center">
-                <img src="<?php echo URLROOT; ?>/img/<?php echo userAvatar(); ?>" alt="person" class="img-fluid rounded-circle">
+                <img src="<?php echo URLROOT . '/all_img/img/' . userAvatar(); ?>" alt="person" class="img-fluid rounded-circle">
                 <h2 class="h5"><?php echo $_SESSION['user_name']; ?></h2><span class="userPosition text-capitalize"><small><?php echo str_replace("is_", "", $_SESSION['has_access']); ?></small></span>
             </div>
             <!-- Small Brand information, appears on minimized sidebar-->
             <div class="sidenav-header-logo"><a href="<?php echo URLROOT; ?>" class="brand-small text-center">
                     <?php
                     if(empty($data['siteImg'])) { $setImg = "nologo.png"; } else { $setImg = $data['siteImg']; } ?>
-                    <img class="" width="50" alt="ESL" src="<?php echo URLROOT . '/img/' . $setImg; ?>">
+                    <img class="" width="50" alt="Logo" src="<?php echo URLROOT . '/all_img/img/' . $setImg; ?>">
                 </a>
             </div>
         </div>
