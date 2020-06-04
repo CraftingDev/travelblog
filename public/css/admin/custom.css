@@ -47,6 +47,16 @@ table th, table td{
     vertical-align: middle!important;
 }
 
+/* Select every 3rd list item starting with first */
+.smaller-font > th {
+    font-size: 85%;
+    font-weight: 500;
+}
+.smaller-font > th:first-child {
+    font-size: 95%;
+    font-weight: 700;
+}
+
 @media (max-width: 575px){
     .table.btn-block-xs {
         display: inline!important;

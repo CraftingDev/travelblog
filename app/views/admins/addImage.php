@@ -28,7 +28,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="glTitle"><i class="fas fa-signature formIcons"></i>
+                                    <label for="glTitle"><i class="fas fa-heading formIcons"></i>
                                         <span class="inline-span"> Title: <sub>*</sub></span></label>
                                     <input id="glTitle" maxlength="100"
                                            class="form-control form-control-lg <?php echo (!empty($data['glTitle_err'])) ? 'is-invalid' : ''; ?>"
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="custom-file form-control-lg mb-2" id="customFile" lang="en">
-                                        <label class="custom-file-label" for="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile"><i class="far fa-image formIcons"></i>
                                             <small>Upload image...</small>
                                         </label>
                                         <input name="glImg" type="file"

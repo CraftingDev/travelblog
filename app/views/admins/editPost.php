@@ -43,6 +43,16 @@
                                     <span class="invalid-feedback"><?php echo $data['psTitle_err']; ?></span>
                                 </div>
 
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="psSubTitle"><i class="fas fa-signature formIcons"></i>
+                                        <span class="inline-span"> Sub Title: </span></label>
+                                    <input id="psSubTitle" maxlength="100"
+                                           class="form-control form-control-lg"
+                                           name="psSubTitle"
+                                           type="text" value="<?php echo $data['psTitle']; ?>">
+                                </div>
+
                                 <div class="col-md-12 mb-3">
                                     <label for="psPost"><i class="fas fa-user-secret formIcons"></i>
                                         <span class="inline-span eppMe"> Bio: (Minimum 100) <sub>*</sub></span></label>

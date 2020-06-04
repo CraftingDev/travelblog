@@ -13,6 +13,7 @@
         <tr>
             <th scope="col">Category</th>
             <th scope="col">Title</th>
+            <th scope="col">Sub Title</th>
             <th class="text-center" scope="col">User</th>
             <th class="text-center" scope="col">Created</th>
             <th scope="col"></th>
@@ -25,11 +26,13 @@
         <?php
         if(is_array($data['posts'])) :
             foreach($data['posts'] as $ps) : ?>
-                <tr>
+                <tr class="smaller-font">
                     <th class="text-center text-md-left" scope="col"><?php echo $ps->ps_cat_name; ?></th>
                     <th class="text-center text-md-left" scope="col"><?php echo $ps->ps_title; ?></th>
+                    <th class="text-center text-md-left" scope="col"><?php echo $ps->ps_sub_title; ?></th>
                     <th class="text-center text-md-left" scope="col"><?php echo $ps->us_first; ?></th>
                     <th class="text-center text-md-left" scope="col"><?php echo infoDate($ps->ps_created); ?></th>
+
                     <th class="text-center p-1" scope="col"><a href="<?php echo URLROOT . '/admins/editPost/' . $ps->ps_slug; ?>" class="btn btn-block btn-light btn-sm btn-block-xs"><i class="far fa-edit"></i></a></th>
                     <th class="text-center p-1" scope="col">
                         <form action="<?php echo URLROOT . '/admins/deletePost/' . $ps->ps_id; ?>" method="post">

@@ -27,7 +27,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="vdTitle"><i class="fas fa-signature formIcons"></i>
+                                    <label for="vdTitle"><i class="fas fa-heading formIcons"></i>
                                         <span class="inline-span"> Title: <sub>*</sub></span></label>
                                     <input id="vdTitle" maxlength="100"
                                            class="form-control form-control-lg <?php echo (!empty($data['vdTitle_err'])) ? 'is-invalid' : ''; ?>"
@@ -47,7 +47,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="vdEmbed"><i class="fas fa-signature formIcons"></i>
+                                    <label for="vdEmbed"><i class="fab fa-youtube formIcons"></i>
                                         <span class="inline-span"> Video code: <sub>*</sub></span></label>
                                     <input id="vdEmbed" maxlength="11"
                                            class="form-control form-control-lg <?php echo (!empty($data['vdEmbed_err'])) ? 'is-invalid' : ''; ?>"

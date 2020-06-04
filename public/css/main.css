@@ -32,6 +32,42 @@ body {
     font-family: 'HelveticaNeueLTPro-Md';
 }
 
+.fa-rotate-45 {
+    -ms-transform:rotate(45deg);     /* Internet Explorer 9 */
+    -webkit-transform:rotate(45deg); /* Chrome, Safari, Opera */
+    transform:rotate(45deg);         /* Standard syntax */
+}
+
+.fa-rotate-90 {
+    -ms-transform:rotate(90deg);     /* Internet Explorer 9 */
+    -webkit-transform:rotate(90deg); /* Chrome, Safari, Opera */
+    transform:rotate(90deg);         /* Standard syntax */
+}
+
+.fa-rotate-180 {
+    -ms-transform:rotate(180deg);     /* Internet Explorer 9 */
+    -webkit-transform:rotate(180deg); /* Chrome, Safari, Opera */
+    transform:rotate(180deg);         /* Standard syntax */
+}
+
+.fa-rotate-260 {
+    -ms-transform:rotate(260deg);     /* Internet Explorer 9 */
+    -webkit-transform:rotate(260deg); /* Chrome, Safari, Opera */
+    transform:rotate(260deg);         /* Standard syntax */
+}
+
+.fa-rotate-320 {
+    -ms-transform:rotate(320deg);     /* Internet Explorer 9 */
+    -webkit-transform:rotate(320deg); /* Chrome, Safari, Opera */
+    transform:rotate(320deg);         /* Standard syntax */
+}
+
+
+sub {
+    color: #ff454a!important;
+    font-size: 1.3em!important;
+}
+
 img {
     vertical-align: baseline;
 }

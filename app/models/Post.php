@@ -17,10 +17,11 @@ class Post {
     public function savePost($data, $new_name)
     {
         $this->db->query('INSERT INTO pd_blog 
-                                (ps_title, ps_entry, ps_img, fk_cat_id, user_id) 
-                                 VALUES (:psTitle, :psPost, :post_img, :catId, :userId)');
+                                (ps_title, ps_sub_title, ps_entry, ps_img, fk_cat_id, user_id) 
+                                 VALUES (:psTitle, :psSubTitle, :psPost, :post_img, :catId, :userId)');
         // Bind values
         $this->db->bind(':psTitle', $data['psTitle']);
+        $this->db->bind(':psSubTitle', $data['psSubTitle']);
         $this->db->bind(':psPost', $data['psPost']);
         $this->db->bind(':post_img', $new_name);
         $this->db->bind(':catId', $data['catId']);
@@ -112,9 +113,10 @@ class Post {
 
     public function updatePost($data){
 
-        $this->db->query('UPDATE pd_blog SET ps_title = :psTitle, ps_entry = :psPost, fk_cat_id = :catId WHERE ps_id = :psId');
+        $this->db->query('UPDATE pd_blog SET ps_title = :psTitle, ps_sub_title = :psSubTitle, ps_entry = :psPost, fk_cat_id = :catId WHERE ps_id = :psId');
         // Bind values
         $this->db->bind(':psTitle', $data['psTitle']);
+        $this->db->bind(':psSubTitle', $data['psSubTitle']);
         $this->db->bind(':psPost', $data['psPost']);
         $this->db->bind(':catId', $data['catId']);
         $this->db->bind(':psId', $data['psId']);

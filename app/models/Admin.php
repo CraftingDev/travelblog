@@ -104,6 +104,25 @@ class Admin
         }
     }
 
+
+    public function updateSlide($data, $new_name){
+
+        $this->db->query('UPDATE pd_slides SET sl_title = :slTitle, sl_desc = :slDesc. sl_img = :slImg, sl_data = :slData WHERE sl_id = :slId');
+        // Bind values
+        $this->db->bind(':slId', $data['slId']);
+        $this->db->bind(':slTitle', $data['slTitle']);
+        $this->db->bind(':slDesc', $data['slDesc']);
+        $this->db->bind(':slData', $data['slData']);
+        $this->db->bind(':slImg', $new_name);
+
+
+        if($this->db->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function updateSocials($data){
 
         $this->db->query('UPDATE pd_socials SET facebook_so = :scFacebook, twitter_so = :scTwitter, linkedin_so = :scLinkedin,
@@ -194,6 +213,13 @@ class Admin
                                ORDER BY pd_images.gl_created DESC');
         $result = $this->db->resultSet();
         return $result;
+    }
+
+    public function getSlideById($id){
+        $this->db->query('SELECT * FROM pd_slides WHERE sl_id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
     }
 
 

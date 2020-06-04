@@ -7,7 +7,7 @@
 
 <section>
     <div class="container-fluid">
-        <h1 class="text-center text-uppercase mt-5 mb-5"><?php echo SITENAME; ?></h1>
+        <h1 class="text-center text-uppercase mt-5 mb-5"><i class="fas fa-wave-square fa-rotate-180"></i> <?php echo SITENAME; ?> <i class="fas fa-wave-square fa-rotate-260 color-orange-text"></i></h1>
         <div class="row">
             <div class="col-sm-6 mb-5">
                 <img class="img-fluid" src="<?php echo URLROOT; ?>/all_img/img/cartoon-min.png">

@@ -461,6 +461,7 @@ class Admins extends Base
                     'posts' => $posts,
                     'psId' => $_POST['psId'],
                     'psTitle' => trim($_POST['psTitle']),
+                    'psSubTitle' => trim($_POST['psSubTitle']),
                     'psPost' => trim($_POST['psPost']),
                     'catId' => $_POST['catId'],
                     'cat_err' => '',
@@ -527,6 +528,7 @@ class Admins extends Base
         $data =
             [
                 'psTitle' => '',
+                'psSubTitle' => '',
                 'psPost' => '',
                 'cat_err' => '',
                 'categories' => $categories,
@@ -546,6 +548,7 @@ class Admins extends Base
                     'categories' => $categories,
                     'posts' => $posts,
                     'psTitle' => trim($_POST['psTitle']),
+                    'psSubTitle' => trim($_POST['psSubTitle']),
                     'psPost' => trim($_POST['psPost']),
                     'catId' => trim($_POST['catId']),
                     'userId' => $_SESSION['user_id'],
@@ -893,67 +896,123 @@ class Admins extends Base
 
     }
 
+    public function editSlide($id)
+    {
+        $slides = $this->adminModel->getAllSlides();
+        $slideById = $this->adminModel->getSlideById($id);
+
+        $data =
+            [
+                'slides' => $slides,
+                'slideById' => $slideById,
+            ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data =
+                [
+                    'slides' => $slides,
+                    'slideById' => $slideById,
+                    'slId' => trim($_POST['slId']),
+                    'slTitle' => trim($_POST['slTitle']),
+                    'slDesc' => trim($_POST['slDesc']),
+                    'slData' => trim($_POST['slData']),
+                    'slImg' => $_FILES['slImg']['name'],
+                    'slImg_err' => ''
+                ];
 
 
+            if (empty($data['slImg'])) {
+                $data['slImg_err'] = "Please select image";
+            }
 
-    public function flexibleImgUpload() {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        // Check the file upload
-        //pass the file name to our mime type helper and check the type
-        if ($_FILES['glImg']['error'] == 0) {
-            $type = (get_mime($_FILES['img']['tmp_name']));
-            if ($type == 'image/jpeg' or $type == 'image/jpg' or $type == 'image/png') {
-                // File is excepted
+            if (empty($data['slImg_err'])) {
+                // Check the file upload
+                //pass the file name to our mime type helper and check the type
+                if ($_FILES['slImg']['error'] == 0) {
+                    $type = (get_mime($_FILES['slImg']['tmp_name']));
+                    if ($type == 'image/jpeg' or $type == 'image/jpg' or $type == 'image/png') {
+                        // File is excepted
+                    } else {
+                        $data['slImg_err'] = 'Sorry! Only jpg/jpeg/png files are allowed';
+                    }
+                    $size = $_FILES['slImg']['size'];
+                    if ($size > 31457280) {
+                        $data['slImg_err'] = 'Sorry! Max size is 30MB. Select a smaller file';
+                    }
+                    // Set the upload directory
+                    $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/sliderImg';
+                    $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/sliderImg/mobile';
+
+                    // If no folder create one with permissions
+                    if (!file_exists($directory)) {
+                        mkdir($directory, 755, true);
+                    }
+                    if (!file_exists($directory1)) {
+                        mkdir($directory1, 755, true);
+                    }
+                    // Rename filename
+                    $new_name = round(microtime(true)) . "_" . strtolower($_FILES['slImg']['name']);
+                    // Check if file exist and add write permissions
+                    $path = $directory . '/' . basename($new_name);
+                    $path1 = $directory1 . '/' . basename($new_name);
+
+                    if (file_exists($path)) {
+                        chmod($path, 755);
+                    }
+                    if (move_uploaded_file($_FILES['slImg']['tmp_name'], strtolower($path))) {
+                        // File uploaded
+                    } else {
+                        echo 'Failed to upload your slide';
+                        exit();
+                    }
+                    // Resize the image
+                    $image = new ImageResize($path);
+                    $image->gamma(false);
+                    $image->quality_jpg = 90;
+                    $image->interlace = 0;
+                    $image
+                        ->crop(1350, 550)
+                        ->save($path)
+                        ->crop(650, 150)
+                        ->save($path1);
+
+                } else {
+                    // If no new file set the current DATABASE VALUE AS DEFAULT
+                    $new_name = $data['sameFile'];
+                }
+
+                if ($this->adminModel->updateSlide($data, $new_name)) {
+
+                    flash('resume_message', 'Slide updated');
+                    redirect('admins/editSlide');
+                    exit();
+
+                } else {
+                    echo "Unable to save data";
+                }
             } else {
-                $data['glImg_err'] = 'Sorry! Only jpg/jpeg/png files are allowed';
-            }
-            $size = $_FILES['glImg']['size'];
-            if ($size > 31457280) {
-                $data['glImg_err'] = 'Sorry! Max size is 30MB. Select a smaller file';
-            }
-            $cat_folder = prettyUrl($data['glTitle']);
-            // Set the upload directory
-            $directory = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/' . $cat_folder;
-            $directory1 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/mobile';
-            $directory2 = $_SERVER['DOCUMENT_ROOT'] . '/public/photoImg/thumbs';
-            // If no folder create one with permissions
-            if (!file_exists($directory)) {
-                mkdir($directory, 755, true);
-            }
-            // Rename filename
-            $new_name = round(microtime(true)) . "_" . strtolower($_FILES['glImg']['name']);
-            // Check if file exist and add write permissions
-            $path = $directory . '/' . basename($new_name);
-            $path1 = $directory1 . '/' . basename($new_name);
-            $path2 = $directory2 . '/' . basename($new_name);
 
-            if (file_exists($path)) {
-                chmod($path, 755);
-            }
-            if (move_uploaded_file($_FILES['glImg']['tmp_name'], strtolower($path))) {
-                // File uploaded
-            } else {
-                echo 'Failed to upload your image';
-                exit();
-            }
-            // Resize the image
-            $image = new ImageResize($path);
-            $image->quality_jpg = 90;
-            $image
-                ->crop(1200, 400, true, ImageResize::CROPCENTER)
-                ->save($path)
-                ->resizeToWidth(600)
-                ->save($path2)
-                ->resizeToWidth(200)
-                ->save($path1)
-            ;
+                // SHOW ERRORS
+                $this->adminHeader();
+                $this->adminNav();
+                $this->view('admins/editSlide', $data);
+                $this->adminFooter();
 
-        } else {
-            // If no new file set the current DATABASE VALUE AS DEFAULT
-            //$new_name = $data['sameFile'];
+            }
         }
 
-}
+        /// SHOW DEFAULT VIEW
+        $this->adminHeader();
+        $this->adminNav();
+        $this->view('admins/editSlide', $data);
+        $this->adminFooter();
+
+    }
+
+
 
 
     public function addImage()
@@ -967,7 +1026,10 @@ class Admins extends Base
             [
                 'images' => $images,
                 'categories' => $categories,
-                'countImages' => $countImages
+                'countImages' => $countImages,
+                'glTitle_err' => '',
+                'glImg_err' => '',
+                'glCat_err' => ''
             ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -1106,7 +1168,10 @@ class Admins extends Base
             [
                 'videos' => $videos,
                 'categories' => $categories,
-                'countVideos' => $countVideos
+                'countVideos' => $countVideos,
+                'vdTitle_err' => '',
+                'vdEmbed_err' => '',
+                'vdCat_err' => ''
             ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -1176,6 +1241,7 @@ class Admins extends Base
         $data =
             [
                 'slides' => $slides,
+                'slImg_err' => ''
             ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -1451,7 +1517,6 @@ class Admins extends Base
             redirect($returnUrl);
         }
     }
-
 
 
     public function deleteSlide($id)

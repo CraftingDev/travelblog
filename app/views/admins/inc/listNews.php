@@ -19,7 +19,7 @@
                else:
                $content = $ns->ns_title;
                endif; ?>
-                <tr>
+                <tr class="smaller-font">
                     <th class="text-center" scope="col"><?php echo $content; ?></th>
                     <th class="text-center" scope="col"><?php echo $ns->ns_type; ?></th>
                     <th class="text-center p-1" scope="col"><a href="<?php echo URLROOT . '/admins/editNews/' . $ns->ns_id; ?>" class="btn btn-block btn-light btn-sm btn-block-xs"><i class="far fa-edit"></i></a></th>

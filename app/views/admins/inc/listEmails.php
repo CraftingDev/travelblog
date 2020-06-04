@@ -22,7 +22,7 @@
         <?php
         if(is_array($data['emails'])) :
             foreach($data['emails'] as $e) : ?>
-                <tr>
+                <tr class="smaller-font">
                     <th class="text-center" scope="col"><?php echo $e->email; ?></th>
                     <th class="text-center" scope="col"><?php echo infoDate($e->em_created); ?></th>
                     <th class="text-center p-1" scope="col">

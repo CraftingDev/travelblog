@@ -26,12 +26,12 @@
         <?php
         if(is_array($data['images'])) :
             foreach($data['images'] as $gl) : ?>
-                <tr>
+                <tr class="smaller-font">
                     <th class="text-center text-md-left" scope="col"><?php echo $gl->gl_cat_title; ?></th>
                     <th class="text-center text-md-left" scope="col"><?php echo $gl->gl_title; ?></th>
-                    <th class="text-center text-md-left" scope="col"><small><?php echo $gl->gl_desc; ?></small></th>
+                    <th class="text-center text-md-left" scope="col"><?php echo $gl->gl_desc; ?></th>
                     <th class="text-center text-md-left" scope="col"><img class="img-fluid" src="<?php echo URLROOT . '/photoImg/thumbs/' . $gl->gl_img; ?>" alt="<?php echo $gl->gl_img; ?>"></th>
-                    <th class="text-center text-md-left" scope="col"><small><?php echo infoDate($gl->gl_created); ?></small></th>
+                    <th class="text-center text-md-left" scope="col"><?php echo infoDate($gl->gl_created); ?></th>
                     <th class="text-center p-1" scope="col"><a href="<?php echo URLROOT . '/admins/editImage/' . $gl->gl_id; ?>" class="btn btn-block btn-light btn-sm btn-block-xs"><i class="far fa-edit"></i></a></th>
                     <th class="text-center p-1" scope="col">
                         <form action="<?php echo URLROOT . '/admins/deleteImage/' . $gl->gl_id; ?>" method="post">

@@ -21,12 +21,12 @@
             foreach($data['slides'] as $sl) :
               if(!empty($sl->sl_data)) : $msg = "Has data"; else: $msg = ""; endif;
                 ?>
-                <tr>
+                <tr class="smaller-font">
                     <th class="text-center text-md-left" scope="col"><?php echo $sl->sl_title; ?></th>
-                    <th class="text-center text-md-left" scope="col"><small><?php echo $sl->sl_desc; ?></small></th>
-                    <th width="50" class="text-center text-md-left" scope="col"><small><?php echo $msg; ?></small></th>
+                    <th class="text-center text-md-left" scope="col"><?php echo $sl->sl_desc; ?></th>
+                    <th width="50" class="text-center text-md-left" scope="col"><?php echo $msg; ?></th>
                     <th class="text-center text-md-left" scope="col"><img class="img-fluid" src="<?php echo URLROOT . '/sliderImg/mobile/' . $sl->sl_img; ?>" alt="<?php echo $sl->sl_img; ?>"></th>
-                    <th class="text-center text-md-left" scope="col"><small><?php echo infoDate($sl->sl_created); ?></small></th>
+                    <th class="text-center text-md-left" scope="col"><?php echo infoDate($sl->sl_created); ?></th>
                     <th class="text-center p-1" scope="col"><a href="<?php echo URLROOT . '/admins/editSlide/' . $sl->sl_id; ?>" class="btn btn-block btn-light btn-sm btn-block-xs"><i class="far fa-edit"></i></a></th>
                     <th class="text-center p-1" scope="col">
                         <form action="<?php echo URLROOT . '/admins/deleteSlide/' . $sl->sl_id; ?>" method="post">

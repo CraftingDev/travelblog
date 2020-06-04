@@ -29,12 +29,21 @@
                         <div class="col-md-12 mb-3">
                             <label for="psTitle"><i class="fas fa-signature formIcons"></i>
                                 <span class="inline-span"> Title: <sub>*</sub></span></label>
-                            <input id="name" maxlength="100"
+                            <input id="psTitle" maxlength="100"
                                    class="form-control form-control-lg <?php echo (!empty($data['psTitle_err'])) ? 'is-invalid' : ''; ?>"
                                    name="psTitle"
                                    required
                                    type="text" value="<?php echo $data['psTitle']; ?>">
                             <span class="invalid-feedback"><?php echo $data['psTitle_err']; ?></span>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="psSubTitle"><i class="fas fa-signature formIcons"></i>
+                                <span class="inline-span"> Sub Title: </span></label>
+                            <input id="psSubTitle" maxlength="100"
+                                   class="form-control form-control-lg"
+                                   name="psSubTitle"
+                                   type="text" value="<?php echo $data['psTitle']; ?>">
                         </div>
 
                           <div class="col-md-12 mb-3">
