@@ -39,53 +39,6 @@ class Admin
     }
 
 
-    public function saveVideo($data) {
-        $this->db->query('INSERT INTO pd_videos (vd_title, vd_desc, vd_embed, fk_vid_cat_id) VALUES (:vdTitle, :vdDesc, :vdEmbed, :vdCat)');
-
-        $this->db->bind(':vdTitle', $data['vdTitle']);
-        $this->db->bind(':vdDesc', $data['vdDesc']);
-        $this->db->bind(':vdEmbed', $data['vdEmbed']);
-        $this->db->bind(':vdCat', $data['vdCat']);
-
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function saveImage($data, $new_name) {
-        $this->db->query('INSERT INTO pd_images (gl_title, gl_desc, gl_img, fk_cat_id) VALUES (:glTitle, :glDesc, :glImg, :glCat)');
-
-        $this->db->bind(':glTitle', $data['glTitle']);
-        $this->db->bind(':glDesc', $data['glDesc']);
-        $this->db->bind(':glImg', $new_name);
-        $this->db->bind(':glCat', $data['glCat']);
-
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function saveSlide($data, $new_name) {
-        $this->db->query('INSERT INTO pd_slides (sl_title, sl_desc, sl_img, sl_data) VALUES (:slTitle, :slDesc, :slImg, :slData)');
-
-        $this->db->bind(':slTitle', $data['slTitle']);
-        $this->db->bind(':slDesc', $data['slDesc']);
-        $this->db->bind(':slImg', $new_name);
-        $this->db->bind(':slData', $data['slData']);
-
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     //////////////// UPDATE  FUNCTIONS //////////////////////////////////////////////
 
@@ -105,23 +58,6 @@ class Admin
     }
 
 
-    public function updateSlide($data, $new_name){
-
-        $this->db->query('UPDATE pd_slides SET sl_title = :slTitle, sl_desc = :slDesc. sl_img = :slImg, sl_data = :slData WHERE sl_id = :slId');
-        // Bind values
-        $this->db->bind(':slId', $data['slId']);
-        $this->db->bind(':slTitle', $data['slTitle']);
-        $this->db->bind(':slDesc', $data['slDesc']);
-        $this->db->bind(':slData', $data['slData']);
-        $this->db->bind(':slImg', $new_name);
-
-
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function updateSocials($data){
 
@@ -189,6 +125,7 @@ class Admin
         return $row;
     }
 
+
     public function getAllNews(){
         $this->db->query('SELECT * FROM pd_news');
         $result = $this->db->resultSet();
@@ -207,70 +144,10 @@ class Admin
         return $result;
     }
 
-
-    public function getAllImages(){
-        $this->db->query('SELECT * FROM pd_images LEFT JOIN pd_galleries ON pd_galleries.gl_cat_id = pd_images.fk_cat_id
-                               ORDER BY pd_images.gl_created DESC');
-        $result = $this->db->resultSet();
-        return $result;
-    }
-
-    public function getSlideById($id){
-        $this->db->query('SELECT * FROM pd_slides WHERE sl_id = :id');
-        $this->db->bind(':id', $id);
-        $row = $this->db->single();
-        return $row;
-    }
-
-
-    public function getAllVideos(){
-        $this->db->query('SELECT * FROM pd_videos
-                               LEFT JOIN pd_vid_categories ON pd_vid_categories.vd_cat_id = pd_videos.fk_vid_cat_id
-                               ORDER BY pd_videos.vd_created DESC');
-
-        $results = $this->db->resultSet();
-        return $results;
-    }
-
-
-    public function getAllSlides(){
-        $this->db->query('SELECT * FROM pd_slides ORDER BY pd_slides.sl_created DESC');
-
-        $results = $this->db->resultSet();
-        return $results;
-    }
-
-
     //// COUNT FUNCTIONS
     public function countEmails(){
         $this->db->query('SELECT COUNT(*) AS em 
                                FROM email_list WHERE em_created >= DATE(NOW()) + INTERVAL -7 DAY');
-        $results = $this->db->resultSet();
-        return $results;
-
-    }
-
-    public function countVideos(){
-        $this->db->query('SELECT COUNT(*) AS vi 
-                               FROM pd_videos WHERE vd_created');
-        $results = $this->db->resultSet();
-        return $results;
-
-    }
-
-
-    public function countImages(){
-        $this->db->query('SELECT COUNT(*) AS im 
-                               FROM pd_images WHERE gl_created');
-        $results = $this->db->resultSet();
-        return $results;
-
-    }
-
-
-    public function countPosts(){
-        $this->db->query('SELECT COUNT(*) AS rs 
-                               FROM pd_blog WHERE ps_created >= DATE(NOW()) + INTERVAL -7 DAY');
         $results = $this->db->resultSet();
         return $results;
 
@@ -291,18 +168,7 @@ class Admin
             return false;
         }
     }
-    public function delPost($id) {
 
-        $this->db->query('DELETE FROM pd_blog WHERE ps_id = :id');
-        $this->db->bind(':id', $id);
-
-        // Execute
-        if($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     public function delNews($id) {
@@ -318,45 +184,6 @@ class Admin
         }
     }
 
-    public function delVideo($id) {
-
-        $this->db->query('DELETE FROM pd_videos WHERE vd_id = :id');
-        $this->db->bind(':id', $id);
-
-        // Execute
-        if($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function delImage($id) {
-
-        $this->db->query('DELETE FROM pd_images WHERE gl_id = :id');
-        $this->db->bind(':id', $id);
-
-        // Execute
-        if($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function delSlide($id) {
-
-        $this->db->query('DELETE FROM pd_slides WHERE sl_id = :id');
-        $this->db->bind(':id', $id);
-
-        // Execute
-        if($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 

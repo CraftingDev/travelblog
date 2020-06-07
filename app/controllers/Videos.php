@@ -13,7 +13,7 @@ class Videos extends Base
 
     public function index()
     {
-        $categories = $this->pageModel->getVideoCategories();
+        $categories = $this->videoModel->getVideoCategories();
 
         $data =
             [
@@ -31,7 +31,7 @@ class Videos extends Base
 
     public function show($id) {
 
-        $videos = $this->pageModel->getVideosByCategory($id);
+        $videos = $this->videoModel->getVideosByCategory($id);
 
         $data =
             [

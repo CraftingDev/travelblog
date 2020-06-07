@@ -3,16 +3,16 @@
         <div style="height: 150px;"></div>
         <section>
             <div class="container">
-                <h1 class="text-center text-uppercase mt-3 mb-5"><i class="fas fa-wave-square color-orange-text fa-rotate-320"></i> Contact <i class="fas fa-wave-square fa-rotate-45"></i></h1>
+                <h1 class="text-center text-uppercase mt-3 mb-5"><i class="fas fa-wave-square color-orange-text fa-rotate-320"></i> Con<span class="color-orange-text">tact</span> <i class="fas fa-wave-square fa-rotate-45"></i></h1>
                 <div class="row">
                     <div class="col-md-10 mx-auto">
                         <div class="card card-body bg-light mt-4">
                             <p class="lead col-sm-8 m-3 mb-5">For any questions - insights - thoughts or just plain aspiration.
-                                <br>Fill out the form below and I will happy to get back to you.
+                                <br>Fill out the form below and I will be happy to get back to you.
                             </p>
                             <?php echo flash('contact_message'); ?>
                             <?php echo flash_error('contact_error'); ?>
-                            <form class="icon-form" action="<?php echo URLROOT; ?>/p/contact" method="post" novalidate>
+                            <form class="icon-form" action="<?php echo URLROOT; ?>/p/contact" method="post">
                              <div class="form-row">
                                 <div  class="col-md-6 mb-3">
                                     <label for="ctName"><i class="fas fa-signature formIcons color-orange-text"></i> <span class="inline-span"> Name: <sub>*</sub></span></label>

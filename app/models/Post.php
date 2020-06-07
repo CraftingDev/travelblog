@@ -50,7 +50,7 @@ class Post {
     }
 
     ///// GET FUNCTIONS ///////////////////////////////////////////////////////////////////////////
-    ///
+
     public function getPosts(){
         $this->db->query('SELECT *,
                                pd_blog.ps_id as postId,
@@ -160,6 +160,29 @@ class Post {
         }
     }
 
+
+    public function delPost($id) {
+
+        $this->db->query('DELETE FROM pd_blog WHERE ps_id = :id');
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /////////////////// COUNT ///////////////////////////////////////////////
+
+    public function countPosts(){
+        $this->db->query('SELECT COUNT(*) AS rs 
+                               FROM pd_blog WHERE ps_created >= DATE(NOW()) + INTERVAL -7 DAY');
+        $results = $this->db->resultSet();
+        return $results;
+
+    }
 
 
 } //// POST CLASS ENDS

@@ -50,7 +50,7 @@
                                     <input id="psSubTitle" maxlength="100"
                                            class="form-control form-control-lg"
                                            name="psSubTitle"
-                                           type="text" value="<?php echo $data['psTitle']; ?>">
+                                           type="text" value="<?php echo $data['postById']->ps_sub_title; ?>">
                                 </div>
 
                                 <div class="col-md-12 mb-3">

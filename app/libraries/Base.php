@@ -2,8 +2,11 @@
 /**
  * @property mixed adminModel
  * @property mixed pageModel
- * @property mixed resumeModel
+ * @property mixed postModel
  * @property mixed userModel
+ * @property mixed imageModel
+ * @property mixed videoModel
+ * @property mixed slideModel
  */
 class Base
 {
@@ -20,13 +23,16 @@ class Base
         $this->pageModel = $this->model('Page');
         $this->adminModel = $this->model('Admin');
         $this->postModel = $this->model('Post');
+        $this->imageModel = $this->model('Image');
+        $this->videoModel = $this->model('Video');
+        $this->slideModel = $this->model('Slide');
+
 
         $this->site = $this->pageModel->getHomePage();
         $this->links = $this->pageModel->getLinks();
         $this->socials = $this->pageModel->getSocials();
-        $this->slider = $this->pageModel->getSlider();
-        $this->flex = $this->pageModel->getFlex();
-
+        $this->slider = $this->slideModel->getAllSlides();
+        $this->flex = $this->slideModel->getFlex();
 
     }
 

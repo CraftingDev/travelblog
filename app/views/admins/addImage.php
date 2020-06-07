@@ -49,9 +49,9 @@
                                         <label class="custom-file-label" for="exampleInputFile"><i class="far fa-image formIcons"></i>
                                             <small>Upload image...</small>
                                         </label>
-                                        <input name="glImg" type="file"
+                                        <input name="glImg[]" type="file"
                                                class="custom-file-input <?php echo (!empty($data['glImg_err'])) ? 'is-invalid' : ''; ?>"
-                                               aria-describedby="fileHelp">
+                                               multiple="multiple" aria-describedby="fileHelp">
                                         <span class="invalid-feedback"><?php echo $data['glImg_err']; ?></span>
                                     </div>
 

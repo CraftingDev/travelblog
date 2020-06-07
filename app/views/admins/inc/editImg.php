@@ -44,7 +44,7 @@
     <div class="form-group mt-1 mb-3">
         <input type="submit" value="Update" class="btn btn-primary btn-block">
     </div>
-    <a class="btn btn-outline-secondary" target="_blank" href="<?php echo URLROOT . '/stories/show/' . $data['postById']->ps_slug . '/' . cleanerUrl($data['postById']->ps_title); ?>">See post live</a>
+    <a class="btn btn-outline-secondary" target="_blank" href="<?php echo URLROOT . '/stories/show/' . $data['postById']->ps_slug . '/' . cleanerUrl($data['postById']->ps_title . ' ' . $data['postById']->ps_sub_title); ?>">See post live</a>
 </div>
     </div>
 </form>

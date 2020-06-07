@@ -12,7 +12,7 @@
             <div class="offset-lg-9 col-lg-3">
                 <a href="#">
                     <div class="yt-subscribe">
-                        <img width="150" class="img-fluid rounded-circle userAvatar-img userAvatar-white" src="<?php echo URLROOT; ?>/img/me.jpg" alt="Drifting Dane">
+                        <img width="150" class="img-fluid rounded-circle userAvatar-img userAvatar-white" src="<?php echo URLROOT; ?>/all_img/img/me.jpg" alt="Drifting Dane">
                     </div><!-- .yt-subscribe -->
                 </a>
             </div><!-- .col -->
@@ -21,7 +21,7 @@
                 <div class="container">
                     <div class="consult-postDetail__main">
                         <!-- social-01 -->
-                        <div class="social-01 social-01__style-02">
+                        <div class="social-01 social-01__style-02"><div class="text-center mb-4"><a class="btn-sm btn-sm-outline color-orange" onclick="history.go(-1)" href="#">Back</a></div>
                             <nav class="social-01__navSocial">
                                 <a title="Share on Facebook" class="customer share social-01__item" href="http://www.facebook.com/sharer.php?u=<?php echo URLROOT . '/' . $_GET['url']; ?>"><i class="fab fa-facebook-f fa-fw"></i></a>
                                 <a title="Share on Linkedin" class="customer share social-01__item" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo URLROOT . '/' . $_GET['url']; ?>&title="><i class="fab fa-linkedin-in fa-fw"></i></a>

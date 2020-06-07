@@ -46,7 +46,7 @@ class Stories extends Base
         }
         $data =
             [
-                'title' => $post->ps_title . ' | Stories',
+                'title' => $post->ps_title . ' | ' . $post->ps_sub_title . ' | Stories',
                 'siteName' => $this->site->site_name,
                 'siteDesc' => $post->site->site_desc,
                 'siteWelcome' => $this->site->site_welcome,

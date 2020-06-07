@@ -1,13 +1,14 @@
 <aside class="layout-blog__sidebar">
         <!-- widget-text__widget -->
         <section class="widget-text__widget widget-text__style-02 widget">
-            <h3 class="widget-title">categories</h3>
+            <h3 class="widget-title text-black-50"><span class="color-orange-text">Cate</span>gories</h3>
             <div class="widget-text__content">
                 <ul>
                     <?php foreach ($data['categories'] as $category) : ?>
                         <li><a class="eppMe"
                                href="<?php echo URLROOT . '/categories/' . $category->ps_cat_slug . '/' . cleanerUrl($category->ps_cat_name); ?>"><i
-                                        class="fas fa-chevron-right"></i> <?php echo $category->ps_cat_name; ?><span class="badge"> (<?php echo $category->post_count; ?>)</span></br><small><?php echo $category->ps_cat_desc; ?></small></a></li>
+                                        class="fas fa-chevron-right"></i> <?php echo $category->ps_cat_name; ?><span class="badge"> (<?php echo $category->post_count; ?>)</span></a>
+                            <small><?php echo $category->ps_cat_desc; ?></small></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -16,9 +17,8 @@
 
         <!-- widget-text__widget -->
         <section class="widget-text__widget widget-text__style-04 widget">
-            <h3 class="widget-title">recent post</h3>
+            <h3 class="widget-title text-black-50">Recent<span class="color-orange-text"> post</span></h3>
             <div class="widget-text__content">
-
                 <!--  -->
                 <div class="post-01__style-03">
                     <div>

@@ -188,3 +188,44 @@ $(document).ready(function () {
     });
 
 });
+
+
+
+
+$(function(){
+    // check the main records
+    $('#select_all').click(function(event) {
+        if(this.checked) {
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        }
+        else {
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+});
+
+
+// Check the gallery
+$(function(){
+
+    $('#gallery_all').click(function(event) {
+        if(this.checked) {
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        }
+        else {
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+});

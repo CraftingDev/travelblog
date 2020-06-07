@@ -1,7 +1,8 @@
  <div id="page-content"><!-- Needed for sticky footer-->
      <main role="main">
          <?php require APPROOT . '/views/inc/slider.php'; ?>
-                      <h1 class="text-center text-uppercase mt-5"><i class="fas fa-wave-square color-orange-text fa-rotate-180"></i> Stories <i class="fas fa-wave-square fa-rotate-90"></i></h1>
+                      <h1 class="text-center text-uppercase mt-5"><i class="fas fa-wave-square color-orange-text fa-rotate-180"></i> Sto<span class="color-orange-text">ries</span> <i class="fas fa-wave-square fa-rotate-90"></i></h1>
+
                         <?php flash('resume_message'); ?>
                             <!-- Content-->
 

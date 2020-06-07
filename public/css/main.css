@@ -412,8 +412,8 @@ a:focus {
 
 @media (min-width: 992px) {
     .md-section {
-        padding-top: 150px;
-        padding-bottom: 150px;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 }
 
@@ -1154,8 +1154,8 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
 /* 28. consult_widget_text
 --------------------------------------------------------------------------------*/
 
-.widget-text__widget {
-    color: #c2c2c2;
+.widget-text__widget a {
+    color: #f8b600;
 }
 
 .widget-text__widget ul {
