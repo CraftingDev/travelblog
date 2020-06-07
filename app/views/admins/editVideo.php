@@ -9,12 +9,12 @@
                             <h2>Add post</h2>
                             <?php echo flash_error('resume_errors'); ?>
                             <p>Please fill in all fields with <sub>*</sub></p>
-                            <form action="<?php echo URLROOT . '/admins/editVideo/' . $data['']; ?>" class="icon-form process" enctype="multipart/form-data" method="post" novalidate>
+                            <form action="<?php echo URLROOT . '/admins/editVideo/' . $data['videoById']->vd_id; ?>" class="icon-form process" enctype="multipart/form-data" method="post" novalidate>
                                 <input type="hidden" name="token" value="<?php echo createToken(); ?>">
                                 <div class="col-md-12 mb-3">
                                     <label for="vdCat"><i class="far fa-flag formIcons"></i> Category: <sub>*</sub></label>
                                     <select id="vdCat" name="vdCat" class="custom-select custom-select-lg mb-3 <?php echo (!empty($data['vdCat_err'])) ? 'is-invalid' : ''; ?>" required>
-                                        <option value="" selected>Select category</option>
+                                        <option value="" selected><?php echo $data['videoById']->vd_cat_title; ?></option>
                                         <?php
                                         if(is_array($data['categories'])) :
                                             foreach ($data['categories'] as $cat) : ?>
@@ -33,7 +33,7 @@
                                            class="form-control form-control-lg <?php echo (!empty($data['vdTitle_err'])) ? 'is-invalid' : ''; ?>"
                                            name="vdTitle"
                                            required
-                                           type="text" value="<?php echo $data['vdTitle']; ?>">
+                                           type="text" value="<?php echo $data['videoById']->vd_title; ?>">
                                     <span class="invalid-feedback"><?php echo $data['vdTitle_err']; ?></span>
                                 </div>
 
@@ -43,21 +43,19 @@
                                     <input id="vdDesc" maxlength="100"
                                            class="form-control form-control-lg"
                                            name="vdDesc"
-                                           type="text" value="<?php echo $data['vdDesc']; ?>">
+                                           type="text" value="<?php echo $data['videoById']->vd_desc; ?>">
                                 </div>
 
                                 <div class="col-md-12 mb-3">
                                     <label for="vdEmbed"><i class="fab fa-youtube formIcons"></i>
-                                        <span class="inline-span"> Video code: <sub>*</sub></span></label>
+                                        <span class="inline-span"> YouTube code: <sub>*</sub></span></label>
                                     <input id="vdEmbed" maxlength="11"
                                            class="form-control form-control-lg <?php echo (!empty($data['vdEmbed_err'])) ? 'is-invalid' : ''; ?>"
                                            name="vdEmbed"
                                            required
-                                           type="text" value="<?php echo $data['vdEmbed']; ?>">
+                                           type="text" value="<?php echo $data['videoById']->vd_embed; ?>">
                                     <span class="invalid-feedback"><?php echo $data['vdEmbed_err']; ?></span>
                                 </div>
-
-
 
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group mt-4 mb-3">

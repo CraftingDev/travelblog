@@ -30,7 +30,7 @@ class Video
     ///// GET FUNCTIONS ///////////////////////////////////////////////////////////////////////////
 
     public function getVideoById($id){
-        $this->db->query('SELECT * FROM pd_videos WHERE vd_id = :id');
+        $this->db->query('SELECT * FROM pd_videos LEFT JOIN pd_vid_categories ON pd_vid_categories.vd_cat_id = pd_videos.fk_vid_cat_id WHERE vd_id = :id');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;

@@ -34,7 +34,7 @@ class Image
 
     public function getImageById($id)
     {
-        $this->db->query('SELECT * FROM pd_images WHERE gl_id = :id');
+        $this->db->query('SELECT * FROM pd_images LEFT JOIN pd_galleries ON gl_cat_id = fk_cat_id WHERE gl_id = :id');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;

@@ -760,16 +760,18 @@ class Admins extends Base
     }
 
 
-    public function editImage()
+    public function editImage($id)
     {
 
         $images = $this->imageModel->getAllImages();
+        $imageById = $this->imageModel->getImageById($id);
         $categories = $this->imageModel->getGalleryCategories();
         $countImages = $this->imageModel->countImages();
 
         $data =
             [
                 'images' => $images,
+                'imageById' =>  $imageById,
                 'categories' => $categories,
                 'countImages' => $countImages
             ];
@@ -780,6 +782,8 @@ class Admins extends Base
                 [
                     'categories' => $categories,
                     'images' => $images,
+                    'imageById' =>  $imageById,
+                    'glId' =>  $id,
                     'glTitle' => trim($_POST['glTitle']),
                     'glDesc' => trim($_POST['glDesc']),
                     'glFolder' => trim($_POST['glFolder']),
@@ -913,7 +917,7 @@ class Admins extends Base
                 [
                     'slides' => $slides,
                     'slideById' => $slideById,
-                    'slId' => trim($_POST['slId']),
+                    'slId' =>   $id,
                     'slTitle' => trim($_POST['slTitle']),
                     'slDesc' => trim($_POST['slDesc']),
                     'slData' => trim($_POST['slData']),
@@ -1012,16 +1016,18 @@ class Admins extends Base
 
     }
 
-    public function editVideo()
+    public function editVideo($id)
     {
 
         $videos = $this->videoModel->getAllVideos();
+        $videoById = $this->videoModel->getVideoById($id);
         $categories = $this->videoModel->getVideoCategories();
         $countVideos = $this->videoModel->countVideos();
 
         $data =
             [
                 'videos' => $videos,
+                'videoById' => $videoById,
                 'categories' => $categories,
                 'countVideos' => $countVideos
             ];
@@ -1032,6 +1038,8 @@ class Admins extends Base
                 [
                     'videos' => $videos,
                     'categories' => $categories,
+                    'videoById' => $videoById,
+                    'vdId' => $id,
                     'vdTitle' => trim($_POST['vdTitle']),
                     'vdDesc' => trim($_POST['vdDesc']),
                     'vdEmbed' => trim($_POST['vdEmbed']),

@@ -11,7 +11,6 @@
                             <p>Please fill in all fields with <sub>*</sub></p>
                             <form action="<?php echo URLROOT . '/admins/editSlide/' . $data['slideById']->sl_id; ?>" class="icon-form process" enctype="multipart/form-data" method="post" novalidate>
                                 <input type="hidden" name="token" value="<?php echo createToken(); ?>">
-                                <input type="hidden" name="slId" value="<?php echo $data['slideById']->sl_id; ?>">
                                 <div class="col-md-12 mb-3">
                                     <label for="slTitle"><i class="fas fa-heading formIcons"></i>
                                         <span class="inline-span"> Title: </span></label>
@@ -36,6 +35,14 @@
                                               class="form-control form-control-lg profile_form_bio" name="slData"
                                               type="text" ><?php echo $data['slideById']->sl_data; ?></textarea>
                                 </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="sameFile"><i class="fab fa-wordpress formIcons mt-3"></i> <span class="inline-span">Image: </span></label>
+                                    <div class="userAvatar mt-3">
+                                        <img class="img-fluid mx-auto d-block" src="<?php echo URLROOT; ?>/sliderImg/mobile/<?php echo $data['slideById']->sl_img; ?>">
+                                    </div>
+                                </div>
+
 
                                 <div class="col-md-12 mb-3">
                                     <div class="custom-file form-control-lg mb-2" id="customFile" lang="en">
