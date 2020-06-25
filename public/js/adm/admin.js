@@ -147,7 +147,6 @@ $(document).ready(function () {
 
         images_upload_handler: function (blobInfo, success, failure) {
             let xhr, formData;
-
             xhr = new XMLHttpRequest();
             xhr.withCredentials = false;
             xhr.open('POST', '/upload.php');
@@ -172,13 +171,13 @@ $(document).ready(function () {
             };
 
             formData = new FormData();
-            let fileName =  blobInfo.blob().name;
-           // formData.append('file', blobInfo.blob(), blobInfo.filename());
-            if( typeof(blobInfo.blob().name) !== undefined )
-               fileName = blobInfo.blob().name;
-            else
-               fileName = blobInfo.filename();
-            formData.append('file', blobInfo.blob(), fileName);
+            //let fileName =  blobInfo.blob().name;
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+            //if( typeof(blobInfo.blob().name) !== undefined )
+               //fileName = blobInfo.blob().name;
+            //else
+               //fileName = blobInfo.filename();
+            //formData.append('file', blobInfo.blob(), fileName);
 
             xhr.send(formData);
             //tinymce.activeEditor.uploadImages(function(success) {

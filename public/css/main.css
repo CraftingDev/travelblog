@@ -195,8 +195,24 @@ a {
     }
 }
 .clip-ellipse {
-    clip-path: ellipse(95% 100% at top);
-    -webkit-clip-path: ellipse(43% 100% at top);
+    clip-path: ellipse(40% 100% at bottom);
+    -webkit-clip-path: ellipse(40% 100% at bottom);
+}
+
+@media (max-width: 992px) {
+    .clip-ellipse {
+        clip-path: ellipse(35% 100% at bottom);
+        -webkit-clip-path: ellipse(35% 100% at bottom);
+    }
+    .consult-postDetail__main, .consult-projectDetail__main {
+        padding: 2em!important;
+    }
+    .social-01 {
+        margin-top: 5em;
+    }
+    .corner-back {
+        top: 2em!important;
+    }
 }
 /*
 # Site Branding
@@ -402,7 +418,7 @@ a:focus {
     padding-top: 50px;
     padding-bottom: 50px;
 }
-
+/*
 @media (min-width: 320px) {
     .md-section {
         padding-top: calc(14.88095vw + 2.38095px);
@@ -416,7 +432,7 @@ a:focus {
         padding-bottom: 50px;
     }
 }
-
+*/
 .btn {
     display: inline-block;
     margin-bottom: 0;
@@ -924,6 +940,12 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
 .inline-span { display: block!important;
 }
 
+.corner-back {
+    position: absolute;
+    left: 1.5em;
+    top: 1.5em;
+}
+
 /*--------------------------------------------------------------
 # Blog Page
 --------------------------------------------------------------*/
@@ -964,8 +986,8 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
 
 .post-01__media img {
     width: 100% !important;
+    border-radius: 25px 25px 55px 15px/15px 55px 25px 25px;
 }
-
 .post-01__categories {
     list-style: none;
     padding: 0;
@@ -1094,6 +1116,8 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
     .consult-projectDetail__main .social-01 {
         position: absolute;
         left: 1em;
+
+
     }
 
     .consult-postDetail__main .social-01 .social-01__item,
@@ -1338,9 +1362,9 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
 }
 
 .social-01__style-02 .social-01__item {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+    width: 45px;
+    height: 45px;
+    line-height: 50px;
     border-radius: 50%;
     padding: 0;
     margin: 0 10px;
@@ -1364,6 +1388,10 @@ fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
 .social-01__style-03 .social-01__navSocial {
     display: inline-block;
     vertical-align: middle;
+}
+
+.social-size {
+    font-size: 1.3em;
 }
 
 

@@ -59,7 +59,10 @@ class Page
         // Create the Transport
         // Sendmail
         //$transport = new Swift_SendmailTransport('/usr/sbin/sendmail -bs');
-        $transport = (new Swift_SmtpTransport('localhost', 25));
+        $transport = (new Swift_SmtpTransport('websmtp.simply.com', 587))
+            ->setUsername('hello@wtrekker.com')
+            ->setPassword('Fluency76');
+
         // Create the Mailer using your created Transport
         $mailer = new Swift_Mailer($transport);
         // Create a message

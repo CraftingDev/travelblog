@@ -15,20 +15,19 @@
         </section><!-- End / widget-text__widget -->
 
 
-        <!-- widget-text__widget -->
-        <section class="widget-text__widget widget-text__style-04 widget">
-            <h3 class="widget-title text-black-50">Recent<span class="color-orange-text"> post</span></h3>
-            <div class="widget-text__content">
-                <!--  -->
-                <div class="post-01__style-03">
-                    <div>
-                        <h2 class="post-01__title"><a href="#">Design a Perfect Homepage</a></h2>
-                        <div class="post-01__time">Oct 26, 2017</div>
-                        <div class="post-01__note">by Alice Brooks</div>
-                    </div>
-                </div><!-- End /  -->
-
-            </div>
-        </section><!-- End / widget-text__widget -->
+    <!-- widget-text__widget -->
+    <section class="widget-text__widget widget-text__style-02 widget">
+        <h3 class="widget-title text-black-50">Gal<span class="color-orange-text">leries</span></h3>
+        <div class="widget-text__content">
+            <ul>
+                <?php foreach ($data['galleries'] as $gal) : ?>
+                    <li><a class="eppMe"
+                           href="<?php echo URLROOT . '/galleries/show/' . $gal->gl_cat_id . '/' . cleanerUrl($gal->gl_cat_title); ?>"><i
+                                    class="fas fa-chevron-right"></i> <?php echo $gal->gl_cat_title; ?><span class="badge"> (<?php echo $gal->img_count; ?>)</span></a>
+                        <small><?php echo $gal->gl_cat_desc; ?></small></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section><!-- End / widget-text__widget -->
 
 </aside>

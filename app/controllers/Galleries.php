@@ -11,7 +11,7 @@ class Galleries extends Base
     ////// Image gallery
     public function index()
     {
-        $categories = $this->pageModel->getGalleryCategories();
+        $categories = $this->imageModel->getGalleryCategories();
 
         $data =
             [
@@ -29,7 +29,7 @@ class Galleries extends Base
 
     public function show($id) {
 
-        $images = $this->pageModel->getGalleryImages($id);
+        $images = $this->imageModel->getGalleryImages($id);
 
         $data =
             [

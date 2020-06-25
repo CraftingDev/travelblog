@@ -1,7 +1,7 @@
 <div id="page-content"><!-- Needed for sticky footer-->
     <main role="main">
         <div style="height: 150px;"></div>
-        <section>
+        <section class="mb-5">
             <div class="container">
                 <h1 class="text-center text-uppercase mt-3 mb-5"><i class="fas fa-wave-square color-orange-text fa-rotate-320"></i> Con<span class="color-orange-text">tact</span> <i class="fas fa-wave-square fa-rotate-45"></i></h1>
                 <div class="row">

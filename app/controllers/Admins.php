@@ -705,6 +705,9 @@ class Admins extends Base
                 if (!file_exists($directory)) {
                     mkdir($directory, 755, true);
                 }
+                if (!file_exists($directory2)) {
+                    mkdir($directory2, 755, true);
+                }
                 // Rename filename
                 $new_name = round(microtime(true)) . "_" . strtolower($_FILES['post_img']['name']);
                 // Check if file exist and add write permissions

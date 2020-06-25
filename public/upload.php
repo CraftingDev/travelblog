@@ -35,7 +35,7 @@ if (is_uploaded_file($temp['tmp_name'])){
     }
 
     // Verify extension
-    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
+    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "jpeg", "png"))) {
         header("HTTP/1.0 500 Invalid extension.");
         return;
     }

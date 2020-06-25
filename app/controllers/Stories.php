@@ -12,12 +12,14 @@ class Stories extends Base
     {
         $posts = $this->postModel->getPosts();
         $categories = $this->postModel->getCategories();
+        $galleries = $this->imageModel->getGalleryCategories();
 
         $data =
             [
                 'title' => 'List of stories',
                 'posts' => $posts,
                 'categories' => $categories,
+                'galleries' => $galleries,
                 'siteName' => $this->site->site_name,
                 'siteDesc' => $this->site->site_desc,
                 'siteWelcome' => $this->site->site_welcome,
@@ -25,7 +27,7 @@ class Stories extends Base
                 'creator' => $this->site->site_contact_name,
                 'slider' => $this->slider,
                 'flex' => $this->flex,
-                'ogImg' => 'share-home.png',
+                'ogImg' => 'index-stories.png',
             ];
 
         $this->standardHeader($data);
@@ -42,7 +44,7 @@ class Stories extends Base
         $post = $this->postModel->getPostById($id);
         // No ID redirect
         if (empty($id)) {
-            redirect('Posts');
+            redirect('Stories');
         }
         $data =
             [
