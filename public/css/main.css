@@ -195,8 +195,9 @@ a {
     }
 }
 .clip-ellipse {
-    clip-path: ellipse(40% 100% at bottom);
-    -webkit-clip-path: ellipse(40% 100% at bottom);
+    clip-path: polygon(30% 0%, 100% -30%, 75% 100%, 10% 90%);
+    /*-webkit-clip-path: ellipse(40% 100% at bottom);*/
+    -webkit-clip-path: polygon(30% 0%, 100% -30%, 75% 100%, 10% 90%);
 }
 
 @media (max-width: 992px) {
